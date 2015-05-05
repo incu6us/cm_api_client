@@ -1,39 +1,50 @@
 package com.intropro.hadoop.api.cm;
 
-import com.cloudera.api.v9.RootResourceV9;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
+import com.cloudera.api.v6.RootResourceV6;
+
+@Consumes({ MediaType.APPLICATION_JSON })
+@Produces({ MediaType.APPLICATION_JSON })
 public class Trial {
-	
-	private RootResourceV9 apiRootV9;
+
+	private RootResourceV6 apiRootV6;
 
 	public Trial() {
 		super();
 	}
 
-	public Trial(RootResourceV9 apiRootV9) {
+	public Trial(RootResourceV6 apiRootV6) {
 		super();
-		this.apiRootV9 = apiRootV9;
+		this.apiRootV6 = apiRootV6;
 	}
 
-	public RootResourceV9 getApiRootV9() {
-		return apiRootV9;
+	public RootResourceV6 getApiRootV6() {
+		return apiRootV6;
 	}
 
-	public void setApiRootV9(RootResourceV9 apiRootV9) {
-		this.apiRootV9 = apiRootV9;
+	public void setApiRootV6(RootResourceV6 apiRootV6) {
+		this.apiRootV6 = apiRootV6;
 	}
-	
+
 	/**
 	 * Begin trial
 	 */
-	public void begin(){
-		apiRootV9.getClouderaManagerResource().beginTrial();
+	@POST
+	@Consumes
+	@Path("/trial/begin")
+	public void begin() {
+		apiRootV6.getClouderaManagerResource().beginTrial();
 	}
-	
+
 	/**
 	 * End trial (back to free license)
 	 */
-	public void end(){
-		apiRootV9.getClouderaManagerResource().endTrial();
+	public void end() {
+		apiRootV6.getClouderaManagerResource().endTrial();
 	}
 }
