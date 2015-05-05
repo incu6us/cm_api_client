@@ -1,9 +1,5 @@
 package com.intropro.hadoop.api.cm;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.cloudera.api.v9.RootResourceV9;
 
 public class Trial {

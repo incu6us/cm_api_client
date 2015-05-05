@@ -16,7 +16,7 @@ import com.intropro.hadoop.api.clusters.services.config.TaskScheduler;
 
 public class MapReduceExample {
 
-	private static Logger LOG = Logger.getLogger(RoleCommandsExample.class);
+	private static Logger LOG = Logger.getLogger(MapReduceExample.class);
 
 	private static String HOST = "c-master";
 	private static String USER = "admin";
