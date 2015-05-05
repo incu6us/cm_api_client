@@ -1,6 +1,7 @@
 package com.intropro.hadoop.api.clusters.commands;
 
-import com.cloudera.api.v9.RootResourceV9;
+import com.cloudera.api.model.ApiCommand;
+import com.cloudera.api.v6.RootResourceV6;
 
 /**
  * Updates all refreshable configuration files in the cluster. Will not restart
@@ -9,34 +10,34 @@ import com.cloudera.api.v9.RootResourceV9;
  */
 public class RefreshCluster {
 
-	private RootResourceV9 apiRootV9;
+	private RootResourceV6 apiRootV6;
 
 	public RefreshCluster() {
 		super();
 	}
 
-	public RefreshCluster(RootResourceV9 apiRootV9) {
+	public RefreshCluster(RootResourceV6 apiRootV6) {
 		super();
-		this.apiRootV9 = apiRootV9;
+		this.apiRootV6 = apiRootV6;
 	}
 
-	public RootResourceV9 getApiRootV9() {
-		return apiRootV9;
+	public RootResourceV6 getApiRootV6() {
+		return apiRootV6;
 	}
 
-	public void setApiRootV9(RootResourceV9 apiRootV9) {
-		this.apiRootV9 = apiRootV9;
+	public void setApiRootV6(RootResourceV6 apiRootV6) {
+		this.apiRootV6 = apiRootV6;
 	}
 
 	@SuppressWarnings("finally")
 	public String doFresh(String clusterName) {
 		String log = "refresh fail";
 		try {
-			if (apiRootV9.getClustersResource().refresh(clusterName).getSuccess()) {
+			ApiCommand cmd = apiRootV6.getClustersResource().refresh(clusterName);
+			if (cmd.getId() instanceof Long) {
 				log = "refreshed succesfully";
 			}
 		} catch (NullPointerException e) {
-			e.printStackTrace();
 			log = "no such cluster with name: " + clusterName;
 		} finally {
 			return log;

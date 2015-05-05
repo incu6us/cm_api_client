@@ -24,6 +24,7 @@ public class RefreshClusterExample {
 	public static void main(String... args) throws InterruptedException, IOException {
 
 		InitApiConnection connection = new InitApiConnection(HOST, USER, PASS);
+		connection.setApiRootV9(new ClouderaManagerClientBuilder().withHost(HOST).withUsernamePassword(USER, PASS).build().getRootV9());
 		RootResourceV1 apiRootV1 = connection.getApiRootV1();
 
 		/*
