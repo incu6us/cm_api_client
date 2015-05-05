@@ -81,6 +81,11 @@ public class RoleCommands {
 				}
 			}
 		}
+		
+		if(log.isEmpty()){
+			log.put("null", Arrays.asList("nothing to do..."));
+		}
+		
 		return log;
 	}
 
@@ -113,6 +118,11 @@ public class RoleCommands {
 				}
 			}
 		}
+		
+		if(log.isEmpty()){
+			log.put("null", Arrays.asList("nothing to do..."));
+		}
+		
 		return log;
 	}
 
