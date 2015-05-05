@@ -30,9 +30,7 @@ public class InitApiConnection {
 
 	public InitApiConnection() {
 		super();
-		
-		this.apiRootV1 = new ClouderaManagerClientBuilder().withHost(this.host).withUsernamePassword(this.user, this.password).build().getRootV1();
-	}
+	}		
 
 	public InitApiConnection(String host, String user, String password) {
 		super();

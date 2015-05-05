@@ -1,31 +1,31 @@
 package com.intropro.main.example;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import com.cloudera.api.ClouderaManagerClientBuilder;
 import com.cloudera.api.DataView;
 import com.cloudera.api.model.ApiCluster;
 import com.cloudera.api.model.ApiClusterList;
 import com.cloudera.api.v1.RootResourceV1;
+import com.cloudera.api.v9.RootResourceV9;
 import com.intropro.hadoop.api.InitApiConnection;
-import com.intropro.hadoop.api.cm.service.RoleCommands;
+import com.intropro.hadoop.api.clusters.commands.RefreshCluster;
 
-public class RoleCommandsExample {
+public class RefreshClusterExample {
 
-	private static Logger LOG = Logger.getLogger(RoleCommandsExample.class);
+	private static Logger LOG = Logger.getLogger(RefreshClusterExample.class);
 
 	private static String HOST = "c-master";
 	private static String USER = "admin";
 	private static String PASS = "admin";
 
 	public static void main(String... args) throws InterruptedException, IOException {
-		
+
 		InitApiConnection connection = new InitApiConnection(HOST, USER, PASS);
 		RootResourceV1 apiRootV1 = connection.getApiRootV1();
-		
+
 		/*
 		 * List of clusters
 		 */
@@ -34,12 +34,11 @@ public class RoleCommandsExample {
 			LOG.info(cluster.getName() + " - " + cluster.getVersion());
 		}
 
-
 		/*
-		 * Get list of services and roles
+		 * Refresh
 		 */
-		RoleCommands role = new RoleCommands(apiRootV1);
-		Map<String, List<String>> log = role.startAllRoles();
-		LOG.info(log);
+		RefreshCluster refresh = new RefreshCluster(connection.getApiRootV9());
+		LOG.info(refresh.doFresh("Cluster 1"));
+
 	}
 }
