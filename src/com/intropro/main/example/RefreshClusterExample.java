@@ -9,7 +9,6 @@ import com.cloudera.api.DataView;
 import com.cloudera.api.model.ApiCluster;
 import com.cloudera.api.model.ApiClusterList;
 import com.cloudera.api.v1.RootResourceV1;
-import com.cloudera.api.v9.RootResourceV9;
 import com.intropro.hadoop.api.InitApiConnection;
 import com.intropro.hadoop.api.clusters.commands.RefreshCluster;
 

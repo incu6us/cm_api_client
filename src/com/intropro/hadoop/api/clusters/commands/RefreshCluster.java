@@ -1,39 +1,39 @@
 package com.intropro.hadoop.api.clusters.commands;
 
 import com.cloudera.api.model.ApiCommand;
-import com.cloudera.api.v6.RootResourceV6;
+import com.cloudera.api.v9.RootResourceV9;
 
 /**
  * Updates all refreshable configuration files in the cluster. Will not restart
- * any roles. Work with Api V6
+ * any roles. Work with Api V9
  *
  */
 public class RefreshCluster {
 
-	private RootResourceV6 apiRootV6;
+	private RootResourceV9 apiRootV9;
 
 	public RefreshCluster() {
 		super();
 	}
 
-	public RefreshCluster(RootResourceV6 apiRootV6) {
+	public RefreshCluster(RootResourceV9 apiRootV9) {
 		super();
-		this.apiRootV6 = apiRootV6;
+		this.apiRootV9 = apiRootV9;
 	}
 
-	public RootResourceV6 getApiRootV6() {
-		return apiRootV6;
+	public RootResourceV9 getApiRootV9() {
+		return apiRootV9;
 	}
 
-	public void setApiRootV6(RootResourceV6 apiRootV6) {
-		this.apiRootV6 = apiRootV6;
+	public void setApiRootV9(RootResourceV9 apiRootV9) {
+		this.apiRootV9 = apiRootV9;
 	}
 
 	@SuppressWarnings("finally")
 	public String doFresh(String clusterName) {
 		String log = "refresh fail";
 		try {
-			ApiCommand cmd = apiRootV6.getClustersResource().refresh(clusterName);
+			ApiCommand cmd = apiRootV9.getClustersResource().refresh(clusterName);
 			if (cmd.getId() instanceof Long) {
 				log = "refreshed succesfully";
 			}
