@@ -9,7 +9,6 @@ import com.cloudera.api.ClouderaManagerClientBuilder;
 import com.cloudera.api.v9.RootResourceV9;
 import com.intropro.hadoop.api.InitApiConnection;
 import com.intropro.hadoop.api.clusters.Hosts;
-import com.intropro.hadoop.api.clusters.commands.HostInstall;
 
 public class HostsExample {
 
@@ -24,15 +23,13 @@ public class HostsExample {
 		InitApiConnection connection = new InitApiConnection();
 		connection.setApiRootV9(new ClouderaManagerClientBuilder().withHost(HOST).withUsernamePassword(USER, PASS).build().getRootV9());
 		RootResourceV9 apiRootV9 = connection.getApiRootV9();
+		Hosts hosts = new Hosts(apiRootV9);
 
 		try {
-			HostInstall host = new HostInstall(apiRootV9);
-			host.install(NODE, "root", "22");
+			hosts.install(NODE, "root", "22");
 		} catch (BadRequestException e) {
 
 		}
-		
-		Hosts hosts = new Hosts(apiRootV9);
 
 		try {
 			hosts.addHost("AutoCluster1", NODE);
