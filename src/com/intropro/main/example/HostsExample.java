@@ -14,10 +14,10 @@ public class HostsExample {
 
 	private static Logger LOG = Logger.getLogger(HostsExample.class);
 
-	private static String HOST = "52.17.36.200";
+	private static String HOST = "c-master";
 	private static String USER = "admin";
 	private static String PASS = "admin";
-	private static String NODE = "node4.ea.intropro.com";
+	private static String NODE = "c-slave-1";
 
 	public static void main(String... args) {
 		InitApiConnection connection = new InitApiConnection();
@@ -25,6 +25,9 @@ public class HostsExample {
 		RootResourceV9 apiRootV9 = connection.getApiRootV9();
 		Hosts hosts = new Hosts(apiRootV9);
 
+		/*
+		 * Install then add host to cluster
+		 */
 		try {
 			hosts.install(NODE, "root", "22");
 		} catch (BadRequestException e) {
@@ -36,6 +39,13 @@ public class HostsExample {
 		} catch (NotFoundException e) {
 			LOG.error(e);
 		}
+
+		/*
+		 * Host decommition
+		 */
+		// hosts.decommision(NODE);
+		
+		
 		LOG.info("finish");
 	}
 }

@@ -6,6 +6,7 @@ import com.cloudera.api.DataView;
 import com.cloudera.api.model.ApiHost;
 import com.cloudera.api.model.ApiHostInstallArguments;
 import com.cloudera.api.model.ApiHostList;
+import com.cloudera.api.model.ApiHostNameList;
 import com.cloudera.api.model.ApiHostRef;
 import com.cloudera.api.model.ApiHostRefList;
 import com.cloudera.api.v9.RootResourceV9;
@@ -115,4 +116,13 @@ public class Hosts {
 		apiRootV9.getClustersResource().removeHost(clusterName, hostId);
 	}
 
+	/**
+	 * Host decommision
+	 * 
+	 * @param hostName
+	 */
+	public void decommision(String hostName) {
+		ApiHostNameList hostNameList = new ApiHostNameList(Arrays.asList(hostName));
+		apiRootV9.getClouderaManagerResource().hostsDecommissionCommand(hostNameList);
+	}
 }
