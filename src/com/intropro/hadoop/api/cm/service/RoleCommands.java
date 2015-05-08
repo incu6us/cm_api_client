@@ -153,6 +153,12 @@ public class RoleCommands {
 		apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(serviceName).createRoles(roles);
 	}
 	
+	public void deleteHdfsRole(String clusterName) {
+		String serviceName = "HDFS";
+
+		apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(serviceName).deleteRole("");
+	}
+	
 	public void addMapReduceRole(String clusterName, String hostId, MapReduceRoleType roleType) {
 		String serviceName = "MAPRED";
 

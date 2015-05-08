@@ -3,12 +3,18 @@ package com.intropro.hadoop.api.clusters;
 import java.util.Arrays;
 
 import com.cloudera.api.DataView;
+import com.cloudera.api.model.ApiCluster;
 import com.cloudera.api.model.ApiHost;
 import com.cloudera.api.model.ApiHostInstallArguments;
 import com.cloudera.api.model.ApiHostList;
 import com.cloudera.api.model.ApiHostNameList;
 import com.cloudera.api.model.ApiHostRef;
 import com.cloudera.api.model.ApiHostRefList;
+import com.cloudera.api.model.ApiRole;
+import com.cloudera.api.model.ApiService;
+import com.cloudera.api.v1.ClustersResource;
+import com.cloudera.api.v1.RolesResource;
+import com.cloudera.api.v1.ServicesResource;
 import com.cloudera.api.v9.RootResourceV9;
 
 /**
@@ -94,6 +100,7 @@ public class Hosts {
 		}
 		return hostId;
 	}
+	
 
 	/**
 	 * Delete host from cluster by hostname (ex.: "node4.example.com")
