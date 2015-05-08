@@ -108,9 +108,9 @@ public class Hosts {
 	 * @param clusterName
 	 * @param hostId
 	 */
-	public void deleteHostByName(String clusterName, String hostName) {
+	public String deleteHostFormClusterByName(String clusterName, String hostName) {
 		String hostId = getHostId(clusterName, hostName);
-		apiRootV9.getClustersResource().removeHost(clusterName, hostId);
+		return apiRootV9.getClustersResource().removeHost(clusterName, hostId).getHostId();
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class Hosts {
 	 * @param clusterName
 	 * @param hostId
 	 */
-	public void deleteHostById(String clusterName, String hostId) {
+	public void deleteHostFormClusterById(String clusterName, String hostId) {
 		apiRootV9.getClustersResource().removeHost(clusterName, hostId);
 	}
 

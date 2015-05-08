@@ -175,9 +175,21 @@ public class RoleCommands {
 		return roleState;
 	}
 
-	// public void deleteHdfsRole(String clusterName) {
-	// apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(HDFSSERVICENAME).deleteRole("");
-	// }
+	/**
+	 * 
+	 * @param clusterName
+	 * @param hostId
+	 * @param serviceName
+	 */
+	public void deleteRole(String clusterName, String hostId, String serviceName) {
+		ApiRoleList roles = apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(serviceName).readRoles();
+
+		for (ApiRole r : roles) {
+			if (r.getHostRef().getHostId().equals(hostId) && r.getServiceRef().getServiceName().equals(serviceName)) {
+				apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(serviceName).deleteRole(r.getName());
+			}
+		}
+	}
 
 	/**
 	 * Add MapReduce role to host

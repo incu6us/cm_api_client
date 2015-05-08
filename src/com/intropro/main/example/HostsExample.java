@@ -50,7 +50,7 @@ public class HostsExample {
 		 * Delete node
 		 */
 		RoleCommands role = new RoleCommands(apiRootV9);
-		hosts.deleteHostByName("AutoCluster1", NODE);
+		hosts.deleteHostFormClusterByName("AutoCluster1", NODE);
 
 		LOG.info("finish");
 	}
