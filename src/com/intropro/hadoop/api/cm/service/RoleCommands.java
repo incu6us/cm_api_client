@@ -25,6 +25,9 @@ public class RoleCommands {
 	private RootResourceV1 apiRootV1;
 	private RootResourceV9 apiRootV9;
 
+	private final String HDFSSERVICENAME = "HDFS";
+	private final String MAPREDSERVICENAME = "MAPRED";
+
 	public RoleCommands() {
 		super();
 	}
@@ -138,40 +141,62 @@ public class RoleCommands {
 	 * @param roleType
 	 */
 	public void addHdfsRole(String clusterName, String hostId, HdfsRoleType roleType) {
-		String serviceName = "HDFS";
-
 		ApiHostRef hostRef = new ApiHostRef(hostId);
 
-		ApiServiceRef serviceRef = new ApiServiceRef(clusterName, serviceName);
+		ApiServiceRef serviceRef = new ApiServiceRef(clusterName, HDFSSERVICENAME);
 
 		ApiRole role = new ApiRole();
 		role.setHostRef(hostRef);
 		role.setServiceRef(serviceRef);
 		role.setType(roleType.toString());
-		
-		ApiRoleList roles = new ApiRoleList(Arrays.asList(role));
-		apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(serviceName).createRoles(roles);
-	}
-	
-	public void deleteHdfsRole(String clusterName) {
-		String serviceName = "HDFS";
 
-		apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(serviceName).deleteRole("");
+		ApiRoleList roles = new ApiRoleList(Arrays.asList(role));
+		apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(HDFSSERVICENAME).createRoles(roles).getRoles();
 	}
-	
+
+	/**
+	 * Check role state for HDFS role
+	 * 
+	 * @param clusterName
+	 * @param hostId
+	 * @param roleType
+	 * @return
+	 */
+	public String checkHdfsRoleState(String clusterName, String hostId, HdfsRoleType roleType) {
+		String roleState = null;
+
+		ApiRoleList createdRoles = apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(HDFSSERVICENAME).readRoles();
+
+		for (ApiRole r : createdRoles) {
+			if (r.getHostRef().getHostId().equals(hostId) && r.getServiceRef().getServiceName().equals(HDFSSERVICENAME) && r.getType().equals(roleType.name())) {
+				roleState = apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(HDFSSERVICENAME).readRole(r.getName()).getRoleState().name();
+			}
+		}
+		return roleState;
+	}
+
+	// public void deleteHdfsRole(String clusterName) {
+	// apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(HDFSSERVICENAME).deleteRole("");
+	// }
+
+	/**
+	 * Add MapReduce role to host
+	 * 
+	 * @param clusterName
+	 * @param hostId
+	 * @param roleType
+	 */
 	public void addMapReduceRole(String clusterName, String hostId, MapReduceRoleType roleType) {
-		String serviceName = "MAPRED";
-
 		ApiHostRef hostRef = new ApiHostRef(hostId);
 
-		ApiServiceRef serviceRef = new ApiServiceRef(clusterName, serviceName);
+		ApiServiceRef serviceRef = new ApiServiceRef(clusterName, MAPREDSERVICENAME);
 
 		ApiRole role = new ApiRole();
 		role.setHostRef(hostRef);
 		role.setServiceRef(serviceRef);
 		role.setType(roleType.toString());
-		
+
 		ApiRoleList roles = new ApiRoleList(Arrays.asList(role));
-		apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(serviceName).createRoles(roles);
+		apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(MAPREDSERVICENAME).createRoles(roles);
 	}
 }

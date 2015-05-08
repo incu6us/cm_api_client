@@ -24,10 +24,10 @@ public class RoleCommandsExample {
 
 	private static Logger LOG = Logger.getLogger(RoleCommandsExample.class);
 
-	private static String HOST = "c-master";
+	private static String HOST = "52.17.36.200";
 	private static String USER = "admin";
 	private static String PASS = "admin";
-	private static String NODE = "c-slave-1";
+	private static String NODE = "node4.ea.intropro.com";
 	
 	public static void main(String... args) throws InterruptedException, IOException {
 		
@@ -57,9 +57,12 @@ public class RoleCommandsExample {
 		Hosts hosts = new Hosts(apiRootV9);
 		String hostId = hosts.getHostId("AutoCluster1", NODE);
 		RoleCommands role = new RoleCommands(apiRootV9);
-		role.addHdfsRole("AutoCluster1", hostId, HdfsRoleType.DATANODE);
-		role.addHdfsRole("AutoCluster1", hostId, HdfsRoleType.GATEWAY);
-		role.addMapReduceRole("AutoCluster1", hostId, MapReduceRoleType.TASKTRACKER);
-		role.addMapReduceRole("AutoCluster1", hostId, MapReduceRoleType.GATEWAY);
+//		role.addHdfsRole("AutoCluster1", hostId, HdfsRoleType.GATEWAY);
+//		role.addHdfsRole("AutoCluster1", hostId, HdfsRoleType.DATANODE);
+		
+		LOG.info(role.checkHdfsRoleState("AutoCluster1", hostId, HdfsRoleType.DATANODE));
+		
+//		role.addMapReduceRole("AutoCluster1", hostId, MapReduceRoleType.GATEWAY);
+//		role.addMapReduceRole("AutoCluster1", hostId, MapReduceRoleType.TASKTRACKER);
 	}
 }
