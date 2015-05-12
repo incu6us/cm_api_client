@@ -176,6 +176,7 @@ public class RoleCommands {
 	}
 
 	/**
+	 * Delete role from node
 	 * 
 	 * @param clusterName
 	 * @param hostId
