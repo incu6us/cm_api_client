@@ -100,7 +100,6 @@ public class Hosts {
 		}
 		return hostId;
 	}
-	
 
 	/**
 	 * Delete host from cluster by hostname (ex.: "node4.example.com")
@@ -121,6 +120,27 @@ public class Hosts {
 	 */
 	public void deleteHostFormClusterById(String clusterName, String hostId) {
 		apiRootV9.getClustersResource().removeHost(clusterName, hostId);
+	}
+
+	/**
+	 * Delete host from configuration by name
+	 * 
+	 * @param clusterName
+	 * @param hostName
+	 */
+	public void deleteHostByName(String clusterName, String hostName) {
+		String hostId = getHostId(clusterName, hostName);
+		apiRootV9.getHostsResource().deleteHost(hostId);
+	}
+
+	/**
+	 * Delete host from configuration by id
+	 * 
+	 * @param clusterName
+	 * @param hostId
+	 */
+	public void deleteHostById(String clusterName, String hostId) {
+		apiRootV9.getHostsResource().deleteHost(hostId);
 	}
 
 	/**
