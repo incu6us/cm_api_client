@@ -3,18 +3,13 @@ package com.intropro.hadoop.api.clusters;
 import java.util.Arrays;
 
 import com.cloudera.api.DataView;
-import com.cloudera.api.model.ApiCluster;
 import com.cloudera.api.model.ApiHost;
 import com.cloudera.api.model.ApiHostInstallArguments;
 import com.cloudera.api.model.ApiHostList;
 import com.cloudera.api.model.ApiHostNameList;
 import com.cloudera.api.model.ApiHostRef;
 import com.cloudera.api.model.ApiHostRefList;
-import com.cloudera.api.model.ApiRole;
-import com.cloudera.api.model.ApiService;
-import com.cloudera.api.v1.ClustersResource;
-import com.cloudera.api.v1.RolesResource;
-import com.cloudera.api.v1.ServicesResource;
+import com.cloudera.api.model.ApiTimeSeriesResponseList;
 import com.cloudera.api.v9.RootResourceV9;
 
 /**
@@ -151,5 +146,15 @@ public class Hosts {
 	public void decommision(String hostName) {
 		ApiHostNameList hostNameList = new ApiHostNameList(Arrays.asList(hostName));
 		apiRootV9.getClouderaManagerResource().hostsDecommissionCommand(hostNameList);
+	}
+	
+	/**
+	 * Returns time-series list of metrics in 5 minutes
+	 * @see {@link http://www.cloudera.com/content/cloudera/en/documentation/cloudera-manager/v4-latest/Cloudera-Manager-Diagnostics-Guide/cmdg_tsquery.html}
+	 * @param query
+	 * @return
+	 */
+	public ApiTimeSeriesResponseList metrics5min(String query){
+		return apiRootV9.getTimeSeriesResource().queryTimeSeries(query, "5", "now");
 	}
 }
