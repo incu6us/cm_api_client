@@ -155,6 +155,6 @@ public class Hosts {
 	 * @return
 	 */
 	public ApiTimeSeriesResponseList metrics5min(String query){
-		return apiRootV9.getTimeSeriesResource().queryTimeSeries(query, "5", "now");
+		return apiRootV9.getTimeSeriesResource().queryTimeSeries(query, null, "now");
 	}
 }
