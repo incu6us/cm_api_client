@@ -157,7 +157,7 @@ public class RoleCommands {
 		role.setType(roleType.toString());
 
 		ApiRoleList roles = new ApiRoleList(Arrays.asList(role));
-		apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(HDFSSERVICENAME).createRoles(roles).getRoles();
+		System.out.println(apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(HDFSSERVICENAME).createRoles(roles).getRoles());
 	}
 
 	/**
