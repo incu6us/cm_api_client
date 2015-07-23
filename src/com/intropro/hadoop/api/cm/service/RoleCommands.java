@@ -171,7 +171,7 @@ public class RoleCommands {
 	public String checkHdfsRoleState(String clusterName, String hostId, HdfsRoleType roleType) {
 		String roleState = null;
 
-		ApiRoleList createdRoles = apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(HDFSSERVICENAME).readRoles();
+		ApiRoleList createdRoles = apiRootV1.getClustersResource().getServicesResource(clusterName).getRolesResource(HDFSSERVICENAME).readRoles();
 
 		for (ApiRole r : createdRoles) {
 			if (r.getHostRef().getHostId().equals(hostId) && r.getServiceRef().getServiceName().equals(HDFSSERVICENAME) && r.getType().equals(roleType.name())) {
