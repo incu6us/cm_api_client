@@ -27,6 +27,12 @@ public class RoleCommands {
 
 	private final String HDFSSERVICENAME = "HDFS";
 	private final String MAPREDSERVICENAME = "MAPRED";
+	private final String YARNSERVICENAME = "YARN";
+	private final String FLUMESERVICENAME = "FLUME";
+	private final String OOZIESERVICENAME = "OOZIE";
+	private final String HIVESERVICENAME = "HIVE";
+	private final String SPARKONYARNSERVICENAME = "SPARK_ON_YARN";
+	private final String HBASESERVICENAME = "HBASE";
 
 	public RoleCommands() {
 		super();
@@ -211,5 +217,130 @@ public class RoleCommands {
 
 		ApiRoleList roles = new ApiRoleList(Arrays.asList(role));
 		apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(MAPREDSERVICENAME).createRoles(roles);
+	}
+	
+	/**
+	 * Add Yarn role to host
+	 * 
+	 * @param clusterName
+	 * @param hostId
+	 * @param roleType
+	 */
+	public void addYarnRole(String clusterName, String hostId, YarnRoleType roleType) {
+		ApiHostRef hostRef = new ApiHostRef(hostId);
+
+		ApiServiceRef serviceRef = new ApiServiceRef(clusterName, YARNSERVICENAME);
+
+		ApiRole role = new ApiRole();
+		role.setHostRef(hostRef);
+		role.setServiceRef(serviceRef);
+		role.setType(roleType.toString());
+
+		ApiRoleList roles = new ApiRoleList(Arrays.asList(role));
+		apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(YARNSERVICENAME).createRoles(roles);
+	}
+	
+	/**
+	 * Add Flume role to the host
+	 * 
+	 * @param clusterName
+	 * @param hostId
+	 * @param roleType
+	 */
+	public void addFlumeRole(String clusterName, String hostId, FlumeRoleType roleType) {
+		ApiHostRef hostRef = new ApiHostRef(hostId);
+
+		ApiServiceRef serviceRef = new ApiServiceRef(clusterName, FLUMESERVICENAME);
+
+		ApiRole role = new ApiRole();
+		role.setHostRef(hostRef);
+		role.setServiceRef(serviceRef);
+		role.setType(roleType.toString());
+
+		ApiRoleList roles = new ApiRoleList(Arrays.asList(role));
+		apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(FLUMESERVICENAME).createRoles(roles);
+	}
+	
+	/**
+	 * Add Oozie role to the host
+	 * 
+	 * @param clusterName
+	 * @param hostId
+	 * @param roleType
+	 */
+	public void addOozieRole(String clusterName, String hostId, OozieRoleType roleType) {
+		ApiHostRef hostRef = new ApiHostRef(hostId);
+
+		ApiServiceRef serviceRef = new ApiServiceRef(clusterName, OOZIESERVICENAME);
+
+		ApiRole role = new ApiRole();
+		role.setHostRef(hostRef);
+		role.setServiceRef(serviceRef);
+		role.setType(roleType.toString());
+
+		ApiRoleList roles = new ApiRoleList(Arrays.asList(role));
+		apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(OOZIESERVICENAME).createRoles(roles);
+	}
+	
+	/**
+	 * Add Hive role to the host
+	 * 
+	 * @param clusterName
+	 * @param hostId
+	 * @param roleType
+	 */
+	public void addHiveRole(String clusterName, String hostId, HiveRoleType roleType) {
+		ApiHostRef hostRef = new ApiHostRef(hostId);
+
+		ApiServiceRef serviceRef = new ApiServiceRef(clusterName, HIVESERVICENAME);
+
+		ApiRole role = new ApiRole();
+		role.setHostRef(hostRef);
+		role.setServiceRef(serviceRef);
+		role.setType(roleType.toString());
+
+		ApiRoleList roles = new ApiRoleList(Arrays.asList(role));
+		apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(HIVESERVICENAME).createRoles(roles);
+	}
+	
+	/**
+	 * Add Spark on YARN role to the host
+	 * @param clusterName
+	 * @param hostId
+	 * @param roleType
+	 */
+	public void addSparkOnYarnRole(String clusterName, String hostId, SparkOnYarnRoleType roleType) {
+		ApiHostRef hostRef = new ApiHostRef(hostId);
+
+		ApiServiceRef serviceRef = new ApiServiceRef(clusterName, SPARKONYARNSERVICENAME);
+
+		ApiRole role = new ApiRole();
+		role.setHostRef(hostRef);
+		role.setServiceRef(serviceRef);
+		role.setType(roleType.toString());
+
+		ApiRoleList roles = new ApiRoleList(Arrays.asList(role));
+		apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(SPARKONYARNSERVICENAME).createRoles(roles);
+	}
+	
+	/**
+	 * Add Hbase role to the host
+	 * 
+	 * @param clusterName
+	 * @param hostId
+	 * @param roleType
+	 */
+	public void addHbaseOnYarnRole(String clusterName, String hostId, HbaseRoleType roleType) {
+		ApiHostRef hostRef = new ApiHostRef(hostId);
+
+		ApiServiceRef serviceRef = new ApiServiceRef(clusterName, HBASESERVICENAME);
+
+		ApiRole role = new ApiRole();
+		role.setHostRef(hostRef);
+		role.setServiceRef(serviceRef);
+		role.setType(roleType.toString());
+
+		ApiRoleList roles = new ApiRoleList(Arrays.asList(role));
+		apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(HBASESERVICENAME).createRoles(roles);
 	}
 }

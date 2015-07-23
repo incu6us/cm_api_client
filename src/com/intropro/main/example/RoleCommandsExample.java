@@ -24,21 +24,22 @@ public class RoleCommandsExample {
 
 	private static Logger LOG = Logger.getLogger(RoleCommandsExample.class);
 
-	private static String HOST = "52.17.36.200";
+	private static String HOST = "52.17.52.233";
 	private static String USER = "admin";
 	private static String PASS = "admin";
-	private static String NODE = "node4.ea.intropro.com";
+	private static String NODE = "clouderamanager.node.vpr01.devops.internal.intropro.com";
 	
 	public static void main(String... args) throws InterruptedException, IOException {
 		
 		InitApiConnection connection = new InitApiConnection(HOST, USER, PASS);
+//		connection.setApiRootV1(new ClouderaManagerClientBuilder().withHost(HOST).withUsernamePassword(USER, PASS).build().getRootV9());
 		connection.setApiRootV9(new ClouderaManagerClientBuilder().withHost(HOST).withUsernamePassword(USER, PASS).build().getRootV9());
-		RootResourceV1 apiRootV1 = connection.getApiRootV1();
+//		RootResourceV1 apiRootV1 = connection.getApiRootV1();
 		RootResourceV9 apiRootV9 = connection.getApiRootV9();
 		/*
 		 * List of clusters
 		 */
-		ApiClusterList clusters = apiRootV1.getClustersResource().readClusters(DataView.SUMMARY);
+		ApiClusterList clusters = apiRootV9.getClustersResource().readClusters(DataView.SUMMARY);
 		for (ApiCluster cluster : clusters) {
 			LOG.info(cluster.getName() + " - " + cluster.getVersion());
 		}
@@ -52,15 +53,16 @@ public class RoleCommandsExample {
 //		LOG.info(log);
 		
 		/*
-		 * Add role
+		 * Add role (HDFS)
 		 */
 		Hosts hosts = new Hosts(apiRootV9);
 		String hostId = hosts.getHostId("AutoCluster1", NODE);
+		LOG.info(hostId);
 		RoleCommands role = new RoleCommands(apiRootV9);
-//		role.addHdfsRole("AutoCluster1", hostId, HdfsRoleType.GATEWAY);
-//		role.addHdfsRole("AutoCluster1", hostId, HdfsRoleType.DATANODE);
+		role.addHdfsRole("AutoCluster1", hostId, HdfsRoleType.GATEWAY);
+		role.addHdfsRole("AutoCluster1", hostId, HdfsRoleType.DATANODE);
 		
-		LOG.info(role.checkHdfsRoleState("AutoCluster1", hostId, HdfsRoleType.DATANODE));
+//		LOG.info(role.checkHdfsRoleState("AutoCluster1", hostId, HdfsRoleType.DATANODE));
 		
 //		role.addMapReduceRole("AutoCluster1", hostId, MapReduceRoleType.GATEWAY);
 //		role.addMapReduceRole("AutoCluster1", hostId, MapReduceRoleType.TASKTRACKER);

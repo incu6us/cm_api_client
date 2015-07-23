@@ -18,7 +18,7 @@ public class Test {
 
 	private static Logger LOG = Logger.getLogger(RoleCommandsExample.class);
 
-	private static String HOST = "c-master";
+	private static String HOST = "52.17.52.233";
 	private static String USER = "admin";
 	private static String PASS = "admin";
 	private static String MAPREDUCESERVICE = "mapreduce";
