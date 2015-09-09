@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ws.rs.NotFoundException;
+
+import com.cloudera.api.ApiErrorMessage;
 import com.cloudera.api.DataView;
 import com.cloudera.api.model.ApiCluster;
 import com.cloudera.api.model.ApiHostRef;
@@ -171,13 +174,15 @@ public class RoleCommands {
 	public String checkHdfsRoleState(String clusterName, String hostId, HdfsRoleType roleType) {
 		String roleState = null;
 
-		ApiRoleList createdRoles = apiRootV1.getClustersResource().getServicesResource(clusterName).getRolesResource(HDFSSERVICENAME).readRoles();
+		
+		ApiRoleList createdRoles = apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(HDFSSERVICENAME).readRoles();
 
 		for (ApiRole r : createdRoles) {
 			if (r.getHostRef().getHostId().equals(hostId) && r.getServiceRef().getServiceName().equals(HDFSSERVICENAME) && r.getType().equals(roleType.name())) {
 				roleState = apiRootV9.getClustersResource().getServicesResource(clusterName).getRolesResource(HDFSSERVICENAME).readRole(r.getName()).getRoleState().name();
 			}
 		}
+		
 		return roleState;
 	}
 
